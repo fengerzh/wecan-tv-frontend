@@ -3,14 +3,26 @@
 
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
+import InfiniteScroll from 'redux-infinite-scroll';
 
 class AProjectIndex extends Component {
-  componentWillMount() {
-    this.props.fetchProjects();
+  constructor() {
+    super();
+    this.loadMore = this.loadMore.bind(this);
   }
 
-  renderProjects(projects) {
-    return projects.map(aproject =>
+  componentWillMount() {
+    this.props.fetchProjects(0);
+  }
+
+  loadMore() {
+    if (this.props.projects.length > 10) {
+      this.props.fetchProjects(this.props.projects.length);
+    }
+  }
+
+  renderProjects() {
+    return this.props.projects.map(aproject =>
       <li className="list-group-item" key={aproject.ida_project}>
         <Link style={{ color: 'black' }} to={`aproject/${aproject.ida_project}`}>
           <h3 className="list-group-item-heading">{aproject.pro_name}</h3>
@@ -20,7 +32,7 @@ class AProjectIndex extends Component {
   }
 
   render() {
-    const { loading, error, projects } = this.props;
+    const { loading, error } = this.props;
 
     if (loading) {
       return <div className="container"><h1>Posts</h1><h3>Loading...</h3></div>;
@@ -32,7 +44,7 @@ class AProjectIndex extends Component {
       <div className="container">
         <h1>Posts</h1>
         <ul className="list-group">
-          {this.renderProjects(projects)}
+          <InfiniteScroll items={this.renderProjects()} holderType="ul" loadingMore={loading} loadMore={this.loadMore} elementIsScrollable={false} />
         </ul>
       </div>
     );
@@ -41,6 +53,7 @@ class AProjectIndex extends Component {
 
 AProjectIndex.propTypes = {
   fetchProjects: PropTypes.func,
+  loadMore: PropTypes.func,
   projects: PropTypes.array,
   loading: PropTypes.bool,
   error: PropTypes.string,

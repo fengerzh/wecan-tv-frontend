@@ -1,0 +1,13 @@
+root = true
+
+[*.js]
+indent_style = space
+indent_size = 2
+
+[*.jsx]
+indent_style = space
+indent_size = 2
+
+[*.scss]
+indent_style = space
+indent_size = 2

@@ -13,8 +13,11 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchProjects: () => {
-      dispatch(fetchProjects());
+    fetchProjects: (start) => {
+      dispatch(fetchProjects(start));
+    },
+    loadMore: (start) => {
+      dispatch(fetchProjects(start));
     },
   };
 }

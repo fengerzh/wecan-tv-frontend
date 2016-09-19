@@ -22,7 +22,7 @@ export default function (state = INITIAL_STATE, action) {
       return {
         ...state,
         isFetching: false,
-        projects: JSON.parse(action.response),
+        projects: state.projects.concat(JSON.parse(action.response)),
         authenticated: action.authenticated || false,
       };
     case FETCH_PROJECTS_FAILURE:

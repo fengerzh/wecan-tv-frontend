@@ -5,10 +5,10 @@ export const FETCH_PROJECTS = 'FETCH_PROJECTS';
 export const FETCH_PROJECTS_SUCCESS = 'FETCH_PROJECTS_SUCCESS';
 export const FETCH_PROJECTS_FAILURE = 'FETCH_PROJECTS_FAILURE';
 
-export function fetchProjects() {
+export function fetchProjects(start) {
   return {
     [CALL_API]: {
-      endpoint: 'jwtaproject/index',
+      endpoint: `jwtaproject/index?start=${start}`,
       authenticated: true,
       types: [FETCH_PROJECTS, FETCH_PROJECTS_SUCCESS, FETCH_PROJECTS_FAILURE],
     },

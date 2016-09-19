@@ -14,7 +14,7 @@ import Login from './Login';
 import Logout from './Logout';
 import Home from '../components/home';
 import AProjectIndex from './aproject-index';
-import ActivityIndex from '../components/activity-index';
+import ActivityIndex from './activity-index';
 
 // 如果某组件需要验证而用户尚未登录的话，把它跳转到登录页面
 function requireAuth(nextState, replace) {

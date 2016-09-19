@@ -1,52 +1,50 @@
-import React from 'react';
+/* eslint class-methods-use-this: 0 */
+/* eslint react/forbid-prop-types: 0 */
 
-class ActivityIndex extends React.Component {
-  constructor(props) {
-    super(props);
+import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router';
 
-    const data = localStorage.getItem('activityindex');
-    if (data) {
-      // 如果local storage已经有数据了，则直接获取
-      this.state = {
-        activities: JSON.parse(data),
-      };
-    } else {
-      this.state = {
-        activities: [],
-      };
-    }
+class ActivityIndex extends Component {
+  componentWillMount() {
+    this.props.fetchActivities();
   }
 
-  componentDidMount() {
-    const data = localStorage.getItem('activityindex');
-    if (!data) {
-      // 如果没有数据，则调用ajax以获取数据
-      const source = 'http://api.we.com/activities';
-      fetch(source).then(response => response.json()).then((json) => {
-        // 数据获取成功
-        this.setState({
-          activities: json,
-        });
-        // 把数据保存在local storage中
-        localStorage.setItem('activityindex', JSON.stringify(json));
-      });
-    }
+  renderActivities() {
+    console.log(`aaa${this.props}`);
+    return this.props.activities.map(activity =>
+      <li className="list-group-item" key={activity.act_id}>
+        <Link style={{ color: 'black' }} to={`activity/${activity.act_id}`}>
+          <h3 className="list-group-item-heading">{activity.act_id}</h3>
+        </Link>
+      </li>
+    );
   }
 
   render() {
-    // 显示活动列表
-    const rows = [];
-    this.state.activities.forEach((element) => {
-      rows.push(
-        <div key={element.act_id}>
-          <div>{element.act_id}</div>
-          <div>{element.act_title}</div>
-        </div>
-      );
-    });
+    const { loading, error } = this.props;
 
-    return <div>{rows}</div>;
+    if (loading) {
+      return <div className="container"><h1>Posts</h1><h3>Loading...</h3></div>;
+    } else if (error !== '') {
+      return <div className="alert alert-danger">Error: {error}</div>;
+    }
+
+    return (
+      <div className="container">
+        <h1>Posts</h1>
+        <ul className="list-group">
+          {this.renderActivities()}
+        </ul>
+      </div>
+    );
   }
 }
+
+ActivityIndex.propTypes = {
+  fetchActivities: PropTypes.func,
+  activities: PropTypes.array,
+  loading: PropTypes.bool,
+  error: PropTypes.string,
+};
 
 export default ActivityIndex;

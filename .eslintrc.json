@@ -1,0 +1,21 @@
+{
+    "extends": "airbnb",
+    "installedESLint": true,
+    "plugins": [
+        "react"
+    ],
+    "rules": {
+	    "max-len": ["error", 1200]
+    },
+    "env": {
+        "jquery": true,
+        "browser": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 7,
+        "ecmaFeatures": {
+            "jsx": true,
+            "experimentalObjectRestSpread": true
+        }
+    }
+}

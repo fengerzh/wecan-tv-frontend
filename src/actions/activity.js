@@ -1,16 +1,16 @@
 import { CALL_API } from '../middleware/api';
 
 // 项目列表
-export const FETCH_ACTIVTIES = 'FETCH_ACTIVTIES';
-export const FETCH_ACTIVTIES_SUCCESS = 'FETCH_ACTIVTIES_SUCCESS';
-export const FETCH_ACTIVTIES_FAILURE = 'FETCH_ACTIVTIES_FAILURE';
+export const FETCH_ACTIVITIES = 'FETCH_ACTIVTIES';
+export const FETCH_ACTIVITIES_SUCCESS = 'FETCH_ACTIVTIES_SUCCESS';
+export const FETCH_ACTIVITIES_FAILURE = 'FETCH_ACTIVTIES_FAILURE';
 
 export function fetchActivities() {
   return {
     [CALL_API]: {
       endpoint: 'jwtactivity/index',
       authenticated: true,
-      types: [FETCH_ACTIVTIES, FETCH_ACTIVTIES_SUCCESS, FETCH_ACTIVTIES_FAILURE],
+      types: [FETCH_ACTIVITIES, FETCH_ACTIVITIES_SUCCESS, FETCH_ACTIVITIES_FAILURE],
     },
   };
 }

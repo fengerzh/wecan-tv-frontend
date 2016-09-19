@@ -10,7 +10,6 @@ class ActivityIndex extends Component {
   }
 
   renderActivities() {
-    console.log(`aaa${this.props}`);
     return this.props.activities.map(activity =>
       <li className="list-group-item" key={activity.act_id}>
         <Link style={{ color: 'black' }} to={`activity/${activity.act_id}`}>
@@ -42,7 +41,7 @@ class ActivityIndex extends Component {
 
 ActivityIndex.propTypes = {
   fetchActivities: PropTypes.func,
-  activities: PropTypes.array,
+  activities: PropTypes.array.isRequired,
   loading: PropTypes.bool,
   error: PropTypes.string,
 };

@@ -16,9 +16,7 @@ class AProjectIndex extends Component {
   }
 
   loadMore() {
-    if (this.props.projects.length > 10) {
-      this.props.fetchProjects(this.props.projects.length);
-    }
+    this.props.fetchProjects(this.props.projects.length);
   }
 
   renderProjects() {
@@ -54,7 +52,7 @@ class AProjectIndex extends Component {
 AProjectIndex.propTypes = {
   fetchProjects: PropTypes.func,
   loadMore: PropTypes.func,
-  projects: PropTypes.array,
+  projects: PropTypes.array.isRequired,
   loading: PropTypes.bool,
   error: PropTypes.string,
 };

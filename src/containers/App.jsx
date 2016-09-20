@@ -47,6 +47,7 @@ class App extends Component {
           <Route path="aproject-view/:projId" component={AProjectView} onEnter={requireAuth} />
           <Route path="activity-index" component={ActivityIndex} onEnter={requireAuth} />
           <Route path="live-index" component={LiveIndex} onEnter={requireAuth} />
+          <Route path="live-view/:liveId" component={AProjectView} onEnter={requireAuth} />
         </Route>
       </Router>
     );

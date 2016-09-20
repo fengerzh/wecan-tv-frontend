@@ -11,10 +11,6 @@ class AProjectIndex extends Component {
     this.loadMore = this.loadMore.bind(this);
   }
 
-  componentWillMount() {
-    this.props.fetchProjects(0);
-  }
-
   loadMore() {
     this.props.fetchProjects(this.props.projects.length);
   }
@@ -42,7 +38,14 @@ class AProjectIndex extends Component {
       <div className="container">
         <h1>Posts</h1>
         <ul className="list-group">
-          <InfiniteScroll items={this.renderProjects()} holderType="ul" loadingMore={loading} loadMore={this.loadMore} elementIsScrollable={false} />
+          <InfiniteScroll
+            items={this.renderProjects()}
+            holderType="ul"
+            loadingMore={loading}
+            loadMore={this.loadMore}
+            hasMore={this.props.hasMore}
+            elementIsScrollable={false}
+          />
         </ul>
       </div>
     );
@@ -54,6 +57,7 @@ AProjectIndex.propTypes = {
   loadMore: PropTypes.func,
   projects: PropTypes.array.isRequired,
   loading: PropTypes.bool,
+  hasMore: PropTypes.bool,
   error: PropTypes.string,
 };
 

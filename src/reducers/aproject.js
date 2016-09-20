@@ -7,11 +7,14 @@ import {
 const INITIAL_STATE = {
   isFetching: false,
   projects: [],
+  hasMore: true,
   authenticated: false,
   error: '',
 };
 
 export default function (state = INITIAL_STATE, action) {
+  let projects;
+  let hasMore;
   switch (action.type) {
     case FETCH_PROJECTS:
       return {
@@ -19,10 +22,16 @@ export default function (state = INITIAL_STATE, action) {
         isFetching: true,
       };
     case FETCH_PROJECTS_SUCCESS:
+      projects = JSON.parse(action.response);
+      hasMore = false;
+      if (projects.length > 0) {
+        hasMore = true;
+      }
       return {
         ...state,
         isFetching: false,
-        projects: state.projects.concat(JSON.parse(action.response)),
+        projects: state.projects.concat(projects),
+        hasMore,
         authenticated: action.authenticated || false,
       };
     case FETCH_PROJECTS_FAILURE:

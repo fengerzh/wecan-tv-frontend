@@ -6,6 +6,7 @@ import AProjectIndex from '../components/aproject-index';
 function mapStateToProps(state) {
   return {
     projects: state.projectsreducer.projects,
+    hasMore: state.projectsreducer.hasMore,
     loading: state.projectsreducer.isFetching,
     error: state.projectsreducer.error,
   };

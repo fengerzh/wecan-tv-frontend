@@ -29,7 +29,7 @@ class Login extends Component {
     const { errorMessage } = this.props;
 
     return (
-      <div>
+      <div className="container">
         <input type="text" ref={(username) => { this.username = username; }} className="form-control" style={{ marginRight: '5px' }} placeholder="Username" />
         <input type="password" ref={(password) => { this.password = password; }} className="form-control" style={{ marginRight: '5px' }} placeholder="Password" />
         <button onClick={event => this.handleClick(event)} className="btn btn-primary">

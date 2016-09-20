@@ -1,3 +1,6 @@
+// 引入css
+import stles from './styles.css';
+
 // 引入react
 import React from 'react';
 import { render } from 'react-dom';

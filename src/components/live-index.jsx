@@ -12,7 +12,7 @@ class LiveIndex extends Component {
   renderLives() {
     return this.props.lives.map(live =>
       <li className="list-group-item" key={live.description}>
-        <Link style={{ color: 'black' }} to={`live/${live.description}`}>
+        <Link style={{ color: 'black' }} to={`live/${live}`}>
           <h3 className="list-group-item-heading">{live.description}</h3>
         </Link>
       </li>

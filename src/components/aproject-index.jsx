@@ -1,6 +1,3 @@
-/* eslint class-methods-use-this: 0 */
-/* eslint react/forbid-prop-types: 0 */
-
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import InfiniteScroll from 'redux-infinite-scroll';
@@ -18,7 +15,7 @@ class AProjectIndex extends Component {
   renderProjects() {
     return this.props.projects.map(aproject =>
       <li className="list-group-item" key={aproject.ida_project}>
-        <Link style={{ color: 'black' }} to={`aproject/${aproject.ida_project}`}>
+        <Link style={{ color: 'black' }} to={{ pathname: `/aproject-view/${aproject.ida_project}` }}>
           <h3 className="list-group-item-heading">{aproject.pro_name}</h3>
         </Link>
       </li>

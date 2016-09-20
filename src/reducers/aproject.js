@@ -2,11 +2,17 @@ import {
   FETCH_PROJECTS,
   FETCH_PROJECTS_SUCCESS,
   FETCH_PROJECTS_FAILURE,
+  FETCH_PROJECT,
+  FETCH_PROJECT_SUCCESS,
+  FETCH_PROJECT_FAILURE,
 } from '../actions/aproject';
 
 const INITIAL_STATE = {
   isFetching: false,
   projects: [],
+  project: {
+    pro_name: 'loading',
+  },
   hasMore: true,
   authenticated: false,
   error: '',
@@ -35,6 +41,24 @@ export default function (state = INITIAL_STATE, action) {
         authenticated: action.authenticated || false,
       };
     case FETCH_PROJECTS_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.error,
+      };
+    case FETCH_PROJECT:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case FETCH_PROJECT_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        project: JSON.parse(action.response),
+        authenticated: action.authenticated || false,
+      };
+    case FETCH_PROJECT_FAILURE:
       return {
         ...state,
         isFetching: false,

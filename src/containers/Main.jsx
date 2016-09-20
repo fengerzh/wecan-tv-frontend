@@ -13,9 +13,12 @@ class Main extends Component {
   }
 
   render() {
+    const style = {
+      backgroundColor: '#006fc9',
+    };
     return (
       <div>
-        <Navbar>
+        <Navbar inverse fixedTop className="my-navbar" style={style}>
           <Navbar.Header>
             <Navbar.Brand>
               <a href="#">创客空间</a>
@@ -23,7 +26,7 @@ class Main extends Component {
             <Navbar.Toggle />
           </Navbar.Header>
           <Navbar.Collapse>
-            <Nav>
+            <Nav pullRight>
               {this.props.loggedIn ? (
                 <LinkContainer to="/aproject-index">
                   <NavItem>项目列表</NavItem>

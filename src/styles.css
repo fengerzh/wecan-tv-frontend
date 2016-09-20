@@ -1,0 +1,19 @@
+.content .container {
+    padding: 70px 15px 20px;
+}
+
+.my-navbar .navbar-brand {
+    color: white;
+    /*padding-top: 5px;*/
+}
+
+.my-navbar .navbar-nav > li > a {
+    color: white;
+}
+
+.my-navbar .navbar-nav > .active > a:link,
+.my-navbar .navbar-nav > .active > a:visited
+.my-navbar .navbar-nav > .active > a:hover,
+.my-navbar .navbar-nav > .active > a:active {
+    background-color: #006fc9;
+}

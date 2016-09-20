@@ -15,6 +15,7 @@ import Logout from './Logout';
 import Home from '../components/home';
 import AProjectIndex from './aproject-index';
 import ActivityIndex from './activity-index';
+import LiveIndex from './live-index';
 
 // 如果某组件需要验证而用户尚未登录的话，把它跳转到登录页面
 function requireAuth(nextState, replace) {
@@ -43,6 +44,7 @@ class App extends Component {
           <Route path="logout" component={Logout} />
           <Route path="aproject-index" component={AProjectIndex} onEnter={requireAuth} />
           <Route path="activity-index" component={ActivityIndex} onEnter={requireAuth} />
+          <Route path="live-index" component={LiveIndex} onEnter={requireAuth} />
         </Route>
       </Router>
     );

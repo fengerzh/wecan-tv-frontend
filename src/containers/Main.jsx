@@ -30,6 +30,9 @@ class Main extends Component {
               <LinkContainer to="/activity-index">
                 <NavItem>活动列表</NavItem>
               </LinkContainer>
+              <LinkContainer to="/live-index">
+                <NavItem>直播列表</NavItem>
+              </LinkContainer>
               {this.state.loggedIn ? (
                 <LinkContainer to="/logout">
                   <NavItem>登出</NavItem>

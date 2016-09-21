@@ -13,14 +13,11 @@ const INITIAL_STATE = {
   live: {
     description: 'loading',
   },
-  hasMore: true,
   authenticated: false,
   error: '',
 };
 
 export default function (state = INITIAL_STATE, action) {
-  let hasMore;
-  let lives;
   switch (action.type) {
     case FETCH_LIVES:
       return {
@@ -28,16 +25,10 @@ export default function (state = INITIAL_STATE, action) {
         isFetching: true,
       };
     case FETCH_LIVES_SUCCESS:
-      hasMore = false;
-      lives = JSON.parse(action.response);
-      if (lives.length > 0) {
-        hasMore = true;
-      }
       return {
         ...state,
         isFetching: false,
-        lives: state.lives.concat(lives),
-        hasMore,
+        lives: JSON.parse(action.response),
         authenticated: action.authenticated || false,
       };
     case FETCH_LIVES_FAILURE:

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { fetchProject } from '../actions/live';
+import { fetchLive } from '../actions/live';
 
 import LiveView from '../components/LiveView';
 
@@ -13,8 +13,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchProject: (liveId) => {
-      dispatch(fetchProject(liveId));
+    fetchLive: (liveId) => {
+      dispatch(fetchLive(liveId));
     },
   };
 }

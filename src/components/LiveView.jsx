@@ -16,7 +16,7 @@ class LiveView extends Component {
 
     return (
       <div className="container">
-        <h1>{this.props.live.pro_name}</h1>
+        <h1>{this.props.live.description}</h1>
       </div>
     );
   }

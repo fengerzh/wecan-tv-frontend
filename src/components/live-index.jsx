@@ -21,11 +21,11 @@ class LiveIndex extends Component {
       <tr key={live.id_live}>
         <td>{live.id_live}</td>
         <td>
-          <Link to={{ pathname: `/live-view/${live.id_live}` }}>
+          <Link to={{ pathname: `/live-view/${live.sessionId}` }}>
             {live.description}
           </Link>
         </td>
-        <td>{live.state}</td>
+        <td>{live.streamingStatus}</td>
       </tr>
     );
   }

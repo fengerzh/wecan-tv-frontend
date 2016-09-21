@@ -17,6 +17,7 @@ import AProjectIndex from './aproject-index';
 import AProjectView from './AProjectView';
 import ActivityIndex from './activity-index';
 import LiveIndex from './live-index';
+import LiveView from './LiveView';
 
 // 如果某组件需要验证而用户尚未登录的话，把它跳转到登录页面
 function requireAuth(nextState, replace) {
@@ -47,7 +48,7 @@ class App extends Component {
           <Route path="aproject-view/:projId" component={AProjectView} onEnter={requireAuth} />
           <Route path="activity-index" component={ActivityIndex} onEnter={requireAuth} />
           <Route path="live-index" component={LiveIndex} onEnter={requireAuth} />
-          <Route path="live-view/:liveId" component={AProjectView} onEnter={requireAuth} />
+          <Route path="live-view/:liveId" component={LiveView} onEnter={requireAuth} />
         </Route>
       </Router>
     );

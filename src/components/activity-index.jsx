@@ -3,10 +3,16 @@
 
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
+import InfiniteScroll from 'redux-infinite-scroll';
 
 class ActivityIndex extends Component {
-  componentWillMount() {
-    this.props.fetchActivities();
+  constructor() {
+    super();
+    this.loadMore = this.loadMore.bind(this);
+  }
+
+  loadMore() {
+    this.props.fetchActivities(this.props.activities.length);
   }
 
   renderActivities() {
@@ -23,16 +29,22 @@ class ActivityIndex extends Component {
     const { loading, error } = this.props;
 
     if (loading) {
-      return <div className="container"><h1>Posts</h1><h3>Loading...</h3></div>;
+      return <div className="container"><h1>活动列表</h1><h3>Loading...</h3></div>;
     } else if (error !== '') {
       return <div className="alert alert-danger">Error: {error}</div>;
     }
 
     return (
       <div className="container">
-        <h1>Posts</h1>
+        <h1>活动列表</h1>
         <ul className="list-group">
-          {this.renderActivities()}
+          <InfiniteScroll
+            items={this.renderActivities()}
+            loadingMore={loading}
+            loadMore={this.loadMore}
+            hasMore={this.props.hasMore}
+            elementIsScrollable={false}
+          />
         </ul>
       </div>
     );
@@ -41,8 +53,10 @@ class ActivityIndex extends Component {
 
 ActivityIndex.propTypes = {
   fetchActivities: PropTypes.func,
+  loadMore: PropTypes.func,
   activities: PropTypes.array.isRequired,
   loading: PropTypes.bool,
+  hasMore: PropTypes.bool,
   error: PropTypes.string,
 };
 

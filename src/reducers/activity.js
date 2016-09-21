@@ -12,6 +12,8 @@ const INITIAL_STATE = {
 };
 
 export default function (state = INITIAL_STATE, action) {
+  let activities;
+  let hasMore;
   switch (action.type) {
     case FETCH_ACTIVITIES:
       return {
@@ -19,10 +21,16 @@ export default function (state = INITIAL_STATE, action) {
         isFetching: true,
       };
     case FETCH_ACTIVITIES_SUCCESS:
+      activities = JSON.parse(action.response);
+      hasMore = false;
+      if (activities.length > 0) {
+        hasMore = true;
+      }
       return {
         ...state,
         isFetching: false,
-        activities: JSON.parse(action.response),
+        activities: state.activities.concat(activities),
+        hasMore,
         authenticated: action.authenticated || false,
       };
     case FETCH_ACTIVITIES_FAILURE:

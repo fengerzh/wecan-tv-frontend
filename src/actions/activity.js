@@ -5,10 +5,10 @@ export const FETCH_ACTIVITIES = 'FETCH_ACTIVTIES';
 export const FETCH_ACTIVITIES_SUCCESS = 'FETCH_ACTIVTIES_SUCCESS';
 export const FETCH_ACTIVITIES_FAILURE = 'FETCH_ACTIVTIES_FAILURE';
 
-export function fetchActivities() {
+export function fetchActivities(start) {
   return {
     [CALL_API]: {
-      endpoint: 'jwtactivity/index',
+      endpoint: `jwtactivity/index?start=${start}`,
       authenticated: true,
       types: [FETCH_ACTIVITIES, FETCH_ACTIVITIES_SUCCESS, FETCH_ACTIVITIES_FAILURE],
     },

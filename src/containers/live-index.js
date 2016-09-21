@@ -16,6 +16,9 @@ function mapDispatchToProps(dispatch) {
     fetchLives: () => {
       dispatch(fetchLives());
     },
+    loadMore: () => {
+      dispatch(fetchLives());
+    },
   };
 }
 

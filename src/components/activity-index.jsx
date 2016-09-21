@@ -36,7 +36,7 @@ class ActivityIndex extends Component {
 
     return (
       <div className="container">
-        <h1>活动列表</h1>
+        <h1>活动列表 测试 </h1>
         <ul className="list-group">
           <InfiniteScroll
             items={this.renderActivities()}

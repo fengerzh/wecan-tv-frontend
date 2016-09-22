@@ -12,6 +12,7 @@ const INITIAL_STATE = {
   projects: [],
   project: {
     pro_name: 'loading',
+    pro_desc: '',
   },
   hasMore: true,
   authenticated: false,

@@ -1,5 +1,5 @@
 // 引入css
-import stles from './styles.css';
+import './styles.css';
 
 // 引入react
 import React from 'react';

@@ -13,12 +13,6 @@ class AProjectIndex extends Component {
     this.props.fetchProjects(this.props.projects.length);
   }
 
-  // <li className="list-group-item" key={aproject.ida_project}>
-  //   <Link style={{ color: 'black' }} to={{ pathname: `/aproject-view/${aproject.ida_project}` }}>
-  //     <h3 className="list-group-item-heading">{aproject.pro_name}</h3>
-  //   </Link>
-  // </li>
-
   renderProjects() {
     return this.props.projects.map(aproject =>
       <tr key={aproject.ida_project}>
@@ -33,17 +27,6 @@ class AProjectIndex extends Component {
       </tr>
     );
   }
-
-  // <ul className="list-group">
-  //   <InfiniteScroll
-  //     items={this.renderProjects()}
-  //     holderType="ul"
-  //     loadingMore={loading}
-  //     loadMore={this.loadMore}
-  //     hasMore={this.props.hasMore}
-  //     elementIsScrollable={false}
-  //   />
-  // </ul>
 
   render() {
     const { loading, error } = this.props;

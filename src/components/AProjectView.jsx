@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import AProjectForm from './AProjectForm';
 
 class AProjectView extends Component {
   componentWillMount() {
@@ -17,6 +18,7 @@ class AProjectView extends Component {
     return (
       <div className="container">
         <h1>{this.props.project.pro_name}</h1>
+        <AProjectForm initialValues={this.props.project} enableReinitialize />
       </div>
     );
   }

@@ -22,3 +22,42 @@
 .jw-icon-barlogo {
     display: none !important;
 }
+
+.jw-icon-barlogo {
+    display: none;
+}
+#player {
+    width: auto !important;
+    height: 50vh !important;
+    margin: auto;
+}
+.chat-wrap {
+    background: whiteSmoke;
+    height: 33.1vh;
+}
+#msg {
+    width: auto;
+    height: 70%;
+    padding: 10px 0;
+    background: whiteSmoke;
+    overflow: auto;
+    box-sizing: border-box;
+}
+.input-msg {
+    /*display: flex;*/
+    height: 30%;
+    border-top: 1px solid #999;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.input-msg input {
+    /*width: 80vw;*/
+    width: 70%;
+    height: 4vh;
+}
+.input-msg button {
+    /*width: auto;*/
+    width: 20%;
+    height: 4vh;
+    margin: 30px 0 0 20px;
+}

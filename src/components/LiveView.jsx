@@ -1,26 +1,75 @@
 import React, { Component, PropTypes } from 'react';
 
 class LiveView extends Component {
+  constructor() {
+    super();
+    this.state = {
+      websocket: null,
+    };
+  }
+
   componentWillMount() {
     this.props.fetchLive(this.props.params.liveId);
   }
 
   componentDidMount() {
+    // 调用websocket对象建立连接：
+    const msg = document.getElementById('msg');
+    const wsServer = 'ws://front.we.com:9502';
+    this.state.websocket = new WebSocket(wsServer);
     const script = document.createElement('script');
-    // RTMP输出
+
+    // RTMP视频输出
     script.src = '/cyberplayer.js?file=rtmp://play.bcelive.com/live'
       + `/${this.props.params.liveId}&width=680&autostart=true&volume=60&height=400`
       + '&ak=db1c5c6d9c4347e2936fdd007a5ee804&stretching=uniform&controls=true';
-    // FLV输出
-    // script.src = '/cyberplayer.js?file=http://play.bcelive.com/live'
-    //   + `/${this.props.params.liveId}.flv&width=680&autostart=true&volume=60&height=400`
-    //   + '&ak=db1c5c6d9c4347e2936fdd007a5ee804&stretching=uniform&controls=true';
-    // HLS输出
-    // script.src = '/cyberplayer.js?file=http://gh0sbbe1c1x0h58nfad.exp.bcelive.com'
-    //   + `/${this.props.params.liveId}live.m3u8&width=680&autostart=true&volume=60&height=400`
-    //   + '&ak=db1c5c6d9c4347e2936fdd007a5ee804&stretching=uniform&controls=true';
     script.async = true;
     document.getElementById('player').appendChild(script);
+
+    // onopen监听连接打开
+    this.state.websocket.onopen = function onopen(evt) {
+      switch (evt.readyState) {
+        case 0:
+          msg.innerHTML = '正在连接服务器...<br>';
+          break;
+        case 1:
+          msg.innerHTML = '已连接服务器<br>';
+          break;
+        case 2:
+          msg.innerHTML = '正在断开服务器...<br>';
+          break;
+        case 3:
+          msg.innerHTML = '服务器已断开<br>';
+          break;
+        default:
+      }
+    };
+
+    // onmessage 监听服务器数据推送
+    this.state.websocket.onmessage = function onmessage(evt) {
+      const div = document.getElementById('msg');
+      msg.innerHTML += `${evt.data}<br>`;
+      // 保持滚动条始终在底部
+      div.scrollTop = div.scrollHeight;
+    };
+
+    // 网页内按下回车触发点击发送按钮
+    document.onkeydown = function onkeydown(evt) {
+      if (evt.keyCode === 13) {
+        document.getElementById('button').click();
+        return false;
+      }
+      return true;
+    };
+  }
+
+  sendMsg() {
+    const text = document.getElementById('msgText').value;
+    document.getElementById('msgText').value = '';
+    if (text.replace(/(^\s*)|(\s*$)/g, '') !== '') {
+      // 向服务器发送数据
+      this.state.websocket.send(`: ${text}`);
+    }
   }
 
   render() {
@@ -36,6 +85,16 @@ class LiveView extends Component {
       <div className="container">
         <h1>{this.props.live.description}</h1>
         <div id="player" />
+        {/* 主聊天区 */}
+        <div className="chat-wrap">
+          {/* 消息显示区 */}
+          <div id="msg" />
+          {/* 消息发送区 */}
+          <div className="input-msg">
+            <input type="text" name="text" id="msgText" />
+            <button id="button" onClick={event => this.sendMsg(event)} className="btn btn-primary">发送</button>
+          </div>
+        </div>
       </div>
     );
   }

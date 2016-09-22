@@ -12,7 +12,7 @@
 }
 
 .my-navbar .navbar-nav > .active > a:link,
-.my-navbar .navbar-nav > .active > a:visited
+.my-navbar .navbar-nav > .active > a:visited,
 .my-navbar .navbar-nav > .active > a:hover,
 .my-navbar .navbar-nav > .active > a:active {
     background-color: #006fc9;

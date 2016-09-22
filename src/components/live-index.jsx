@@ -3,17 +3,11 @@
 
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
-import InfiniteScroll from 'redux-infinite-scroll';
 import { Table } from 'react-bootstrap';
 
 class LiveIndex extends Component {
-  constructor() {
-    super();
-    this.loadMore = this.loadMore.bind(this);
-  }
-
-  loadMore() {
-    this.props.fetchLives(this.props.lives.length);
+  componentWillMount() {
+    this.props.fetchLives();
   }
 
   renderLives() {
@@ -50,14 +44,9 @@ class LiveIndex extends Component {
               <th>状态</th>
             </tr>
           </thead>
-          <InfiniteScroll
-            items={this.renderLives()}
-            holderType="tbody"
-            loadingMore={loading}
-            loadMore={this.loadMore}
-            hasMore={this.props.hasMore}
-            elementIsScrollable={false}
-          />
+          <tbody>
+            {this.renderLives()}
+          </tbody>
         </Table>
       </div>
     );
@@ -66,10 +55,8 @@ class LiveIndex extends Component {
 
 LiveIndex.propTypes = {
   fetchLives: PropTypes.func,
-  loadMore: PropTypes.func,
   lives: PropTypes.array.isRequired,
   loading: PropTypes.bool,
-  hasMore: PropTypes.bool,
   error: PropTypes.string,
 };
 

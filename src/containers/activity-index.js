@@ -7,14 +7,15 @@ function mapStateToProps(state) {
   return {
     activities: state.activitiesreducer.activities,
     loading: state.activitiesreducer.isFetching,
+    hasMore: state.activitiesreducer.hasMore,
     error: state.activitiesreducer.error,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchActivities: () => {
-      dispatch(fetchActivities());
+    fetchActivities: (start) => {
+      dispatch(fetchActivities(start));
     },
   };
 }

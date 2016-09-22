@@ -68,7 +68,7 @@ class LiveView extends Component {
     document.getElementById('msgText').value = '';
     if (text.replace(/(^\s*)|(\s*$)/g, '') !== '') {
       // 向服务器发送数据
-      this.state.websocket.send(`: ${text}`);
+      this.state.websocket.send(`${this.props.user.username}: ${text}`);
     }
   }
 
@@ -106,6 +106,7 @@ LiveView.propTypes = {
   params: PropTypes.object.isRequired,
   loading: PropTypes.bool,
   error: PropTypes.string,
+  user: PropTypes.object,
 };
 
 export default LiveView;

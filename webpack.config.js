@@ -18,7 +18,10 @@ module.exports = {
       {
         test: /\.jsx?$/, // 找到所有后缀为jsx的文件，并进行编译
         // include: path.join(__dirname, 'src'),
-        exclude: /node_modules/, // 排除node_modules文件夹
+        exclude: [
+          /node_modules/, // 排除node_modules文件夹
+          /cyberplayer/,
+        ],
         loader: 'babel', // 用babel来加载，把所有代码编译为普通浏览器可以使用的代码
         query: {
           presets: [

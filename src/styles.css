@@ -17,3 +17,8 @@
 .my-navbar .navbar-nav > .active > a:active {
     background-color: #006fc9;
 }
+
+/*隐藏cyberplayer的百度图标*/
+.jw-icon-barlogo {
+    display: none !important;
+}

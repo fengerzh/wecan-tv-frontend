@@ -10,15 +10,13 @@ class LiveView extends Component {
 
   componentWillMount() {
     this.props.fetchLive(this.props.params.liveId);
+    // 调用websocket对象建立连接：
+    const wsServer = 'ws://front.we.com:9502';
+    this.state.websocket = new WebSocket(wsServer);
   }
 
   componentDidMount() {
-    // 调用websocket对象建立连接：
-    const msg = document.getElementById('msg');
-    const wsServer = 'ws://front.we.com:9502';
-    this.state.websocket = new WebSocket(wsServer);
     const script = document.createElement('script');
-
     // RTMP视频输出
     script.src = '/cyberplayer.js?file=rtmp://play.bcelive.com/live'
       + `/${this.props.params.liveId}&width=680&autostart=true&volume=60&height=400`
@@ -26,35 +24,35 @@ class LiveView extends Component {
     script.async = true;
     document.getElementById('player').appendChild(script);
 
+    const msgDiv = document.getElementById('msg');
     // onopen监听连接打开
-    this.state.websocket.onopen = function onopen(evt) {
-      switch (evt.readyState) {
+    this.state.websocket.onopen = (evt) => {
+      switch (evt.target.readyState) {
         case 0:
-          msg.innerHTML = '正在连接服务器...<br>';
+          msgDiv.innerHTML = '正在连接服务器...<br>';
           break;
         case 1:
-          msg.innerHTML = '已连接服务器<br>';
+          msgDiv.innerHTML = '已连接服务器<br>';
           break;
         case 2:
-          msg.innerHTML = '正在断开服务器...<br>';
+          msgDiv.innerHTML = '正在断开服务器...<br>';
           break;
         case 3:
-          msg.innerHTML = '服务器已断开<br>';
+          msgDiv.innerHTML = '服务器已断开<br>';
           break;
         default:
       }
     };
 
     // onmessage 监听服务器数据推送
-    this.state.websocket.onmessage = function onmessage(evt) {
-      const div = document.getElementById('msg');
-      msg.innerHTML += `${evt.data}<br>`;
+    this.state.websocket.onmessage = (evt) => {
+      msgDiv.innerHTML += `${evt.data}<br>`;
       // 保持滚动条始终在底部
-      div.scrollTop = div.scrollHeight;
+      msgDiv.scrollTop = msgDiv.scrollHeight;
     };
 
     // 网页内按下回车触发点击发送按钮
-    document.onkeydown = function onkeydown(evt) {
+    document.onkeydown = (evt) => {
       if (evt.keyCode === 13) {
         document.getElementById('button').click();
         return false;
@@ -68,7 +66,7 @@ class LiveView extends Component {
     document.getElementById('msgText').value = '';
     if (text.replace(/(^\s*)|(\s*$)/g, '') !== '') {
       // 向服务器发送数据
-      this.state.websocket.send(`${this.props.user.username}: ${text}`);
+      this.state.websocket.send(`${this.props.username}: ${text}`);
     }
   }
 
@@ -106,7 +104,7 @@ LiveView.propTypes = {
   params: PropTypes.object.isRequired,
   loading: PropTypes.bool,
   error: PropTypes.string,
-  user: PropTypes.object,
+  username: PropTypes.string,
 };
 
 export default LiveView;

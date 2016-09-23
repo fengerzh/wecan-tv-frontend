@@ -52,6 +52,7 @@ export function loginUser(creds) {
         } else {
           // 登录成功，存储token
           localStorage.setItem('id_token', user.id_token);
+          localStorage.setItem('username', user.username);
           dispatch(receiveLogin(user));
         }
         return loginResult;

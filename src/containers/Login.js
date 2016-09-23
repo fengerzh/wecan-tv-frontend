@@ -7,6 +7,7 @@ function mapStateToProps(state) {
   return {
     errorMessage: state.loginreducer.errorMessage,
     isAuthenticated: state.loginreducer.isAuthenticated,
+    username: state.loginreducer.username,
   };
 }
 

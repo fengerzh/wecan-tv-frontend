@@ -8,7 +8,7 @@ function mapStateToProps(state) {
     live: state.livesreducer.live,
     loading: state.livesreducer.isFetching,
     error: state.livesreducer.error,
-    user: state.loginreducer.user,
+    username: state.loginreducer.username,
   };
 }
 

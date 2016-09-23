@@ -10,6 +10,7 @@ import {
 const INITIAL_STATE = {
   isFetching: false,
   isAuthenticated: localStorage.getItem('id_token') !== null,
+  username: localStorage.getItem('username'),
   errorMessage: '',
 };
 
@@ -27,6 +28,7 @@ export default function (state = INITIAL_STATE, action) {
         ...state,
         isFetching: false,
         isAuthenticated: true,
+        username: localStorage.getItem('username'),
         errorMessage: '',
       };
     case LOGIN_FAILURE:

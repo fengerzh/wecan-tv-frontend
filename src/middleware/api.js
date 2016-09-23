@@ -2,7 +2,7 @@
 
 const BASE_URL = 'http://api.we.com/';
 
-function callApi(endpoint, authenticated) {
+function callApi(endpoint, authenticated, method, body) {
   // 我们把token保存在local storage里面
   const token = localStorage.getItem('id_token') || null;
   let config = {};
@@ -11,9 +11,17 @@ function callApi(endpoint, authenticated) {
     // 如果访问此api时需要验证
     if (token) {
       // 检查是否已经保存好了token
-      config = {
-        headers: { Authorization: `Bearer ${token}` },
-      };
+      if (method === 'POST') {
+        config = {
+          headers: { Authorization: `Bearer ${token}` },
+          method,
+          body,
+        };
+      } else {
+        config = {
+          headers: { Authorization: `Bearer ${token}` },
+        };
+      }
     } else {
       // 没有token，报错
       throw new Error('No token saved!');
@@ -44,10 +52,18 @@ export default store => next => (action) => {
   }
 
   const { endpoint, types, authenticated } = callAPI;
+  let { method, body } = callAPI;
+
+  if (!method) {
+    method = 'GET';
+  }
+  if (!body) {
+    body = '';
+  }
 
   const [requestType, successType, errorType] = types;
 
-  return callApi(endpoint, authenticated).then(
+  return callApi(endpoint, authenticated, method, body).then(
     response =>
       next({
         response,

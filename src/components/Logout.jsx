@@ -1,20 +1,21 @@
 import React, { Component, PropTypes } from 'react';
 
 export default class Logout extends Component {
-  constructor(props) {
-    super(props);
+  // constructor(props) {
+  //   super(props);
+  //
+  //   this.state = {
+  //   };
+  // }
 
-    this.state = {
-    };
+  componentWillMount() {
+    this.props.onLogoutClick();
+    window.location.href = '#';
   }
 
   render() {
     return (
-      <div className="container">
-        <button onClick={() => this.props.onLogoutClick()} className="btn btn-primary">
-          Logout
-        </button>
-      </div>
+      <div />
     );
   }
 }

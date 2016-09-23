@@ -1,3 +1,5 @@
+/* eslint react/forbid-prop-types: 0 */
+
 import React, { Component, PropTypes } from 'react';
 
 class LiveView extends Component {
@@ -22,7 +24,7 @@ class LiveView extends Component {
       + `/${this.props.params.liveId}&width=680&autostart=true&volume=60&height=400`
       + '&ak=db1c5c6d9c4347e2936fdd007a5ee804&stretching=uniform&controls=true';
     script.async = true;
-    document.getElementById('player').appendChild(script);
+    document.getElementById('live-player').appendChild(script);
 
     const msgDiv = document.getElementById('msg');
     // onopen监听连接打开
@@ -82,15 +84,19 @@ class LiveView extends Component {
     return (
       <div className="container">
         <h1>{this.props.live.description}</h1>
-        <div id="player" />
+        <div id="live-player" />
         {/* 主聊天区 */}
-        <div className="chat-wrap">
+        <div style={{ background: 'whiteSmoke', height: '33.1vh' }}>
           {/* 消息显示区 */}
-          <div id="msg" />
+          <div id="msg" style={{ width: 'auto', height: '70%', padding: '10px 0', background: 'whitesmoke', overflow: 'auto', boxSizing: 'border-box' }} />
           {/* 消息发送区 */}
-          <div className="input-msg">
-            <input type="text" name="text" id="msgText" />
-            <button id="button" onClick={event => this.sendMsg(event)} className="btn btn-primary">发送</button>
+          <div style={{ height: '30%', borderTop: '1px solid #999', padding: '10px', boxSizing: 'border-box' }}>
+            <div className="col-md-8">
+              <input type="text" name="text" id="msgText" style={{ width: '70%', height: '4vh' }} />
+            </div>
+            <div className="col-md-4">
+              <button id="button" onClick={event => this.sendMsg(event)} className="btn btn-primary" style={{ with: '20%', height: '4vh' }}>发送</button>
+            </div>
           </div>
         </div>
       </div>

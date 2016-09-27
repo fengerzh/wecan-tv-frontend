@@ -25,7 +25,8 @@
 
 #home-player {
     width: 100% !important;
-    height: 40vh !important;
+    /*height: 40vh !important;*/
+    height: 370px !important;
 }
 
 #live-player {

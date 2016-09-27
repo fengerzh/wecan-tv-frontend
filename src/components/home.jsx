@@ -1,8 +1,17 @@
 /* eslint class-methods-use-this: 0 */
 
 import React, { Component } from 'react';
+import { Button, FormGroup, FormControl } from 'react-bootstrap';
 
 class Home extends Component {
+  constructor() {
+    super();
+    this.state = {
+      hover: false,
+    };
+    this.toggleHover = this.toggleHover.bind(this);
+  }
+
   componentDidMount() {
     const script = document.createElement('script');
     const liveId = 'lss-giftivhkx29rmrug';
@@ -13,7 +22,18 @@ class Home extends Component {
     document.getElementById('home-player').appendChild(script);
   }
 
+  toggleHover() {
+    this.setState({ hover: !this.state.hover });
+  }
+
+// <a href="#" style={[{ margin: 'auto auto auto 80px' }, linkStyle]}>Log In</a>
   render() {
+    let linkStyle;
+    if (this.state.hover) {
+      linkStyle = { color: '#76b6e1' };
+    } else {
+      linkStyle = { color: '#2574a9' };
+    }
     return (
       <div className="container">
         <div className="row">
@@ -21,24 +41,25 @@ class Home extends Component {
             <div id="home-player" />
           </div>
           <div className="col-md-4">
-            <div className="signup" style={{ backgroundColor: '#161a1e', height: '40vh', padding: '32px', overflow: 'hidden' }}>
+            <div className="signup" style={{ backgroundColor: '#161a1e', height: '370px', padding: '32px', overflow: 'hidden' }}>
               <div className="header">
                 <h1 style={{ color: '#76b6e1', textAlign: 'center' }}>Wecan TV</h1>
                 <p style={{ fontSize: '24px', color: '#f1f1f1', textAlign: 'center' }}>现在注册</p>
               </div>
               <form className="form">
-                <div className="form-group">
+                <FormGroup>
                   <input type="text" placeholder="用户名" className="form-control" />
-                </div>
-                <div className="form-group">
+                </FormGroup>
+                <FormGroup>
                   <input type="email" placeholder="电子邮箱" className="form-control" />
-                </div>
-                <div className="form-group">
+                </FormGroup>
+                <FormGroup>
                   <input type="password" placeholder="密码" className="form-control" />
-                </div>
-                <div className="form-group">
-                  <button type="submit" className="btn btn-primary">登录</button>
-                </div>
+                </FormGroup>
+                <FormGroup>
+                  <Button type="submit" bsStyle="primary">登录</Button>
+                  <a href="/#/login" style={{ ...linkStyle, margin: 'auto auto auto 80px' }} onMouseEnter={this.toggleHover} onMouseLeave={this.toggleHover}>Log In</a>
+                </FormGroup>
               </form>
             </div>
           </div>

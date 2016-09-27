@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 import Main from './Main';
 import Login from './Login';
 import Logout from './Logout';
+import Signup from './Signup';
 import Home from '../components/home';
 import AProjectIndex from './aproject-index';
 import AProjectView from './AProjectView';
@@ -44,6 +45,7 @@ class App extends Component {
           <IndexRoute component={Home} />
           <Route path="login" component={Login} />
           <Route path="logout" component={Logout} />
+          <Route path="signup" component={Signup} />
           <Route path="aproject-index" component={AProjectIndex} onEnter={requireAuth} />
           <Route path="aproject-view/:projId" component={AProjectView} onEnter={requireAuth} />
           <Route path="activity-index" component={ActivityIndex} onEnter={requireAuth} />

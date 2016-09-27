@@ -26,7 +26,12 @@ class Home extends Component {
     this.setState({ hover: !this.state.hover });
   }
 
-// <a href="#" style={[{ margin: 'auto auto auto 80px' }, linkStyle]}>Log In</a>
+  handleClick() {
+    const email = this.email;
+    const password1 = this.password1;
+    const password2 = this.password2;
+  }
+
   render() {
     let linkStyle;
     if (this.state.hover) {
@@ -46,19 +51,32 @@ class Home extends Component {
                 <h1 style={{ color: '#76b6e1', textAlign: 'center' }}>Wecan TV</h1>
                 <p style={{ fontSize: '24px', color: '#f1f1f1', textAlign: 'center' }}>现在注册</p>
               </div>
-              <form className="form">
+              <form className="form" action="/#/signup">
                 <FormGroup>
-                  <input type="text" placeholder="用户名" className="form-control" />
+                  <FormControl type="email" ref={(email) => { this.email = email; }} placeholder="电子邮箱" />
                 </FormGroup>
                 <FormGroup>
-                  <input type="email" placeholder="电子邮箱" className="form-control" />
+                  <FormControl type="password" ref={(password1) => { this.password2 = password1; }} placeholder="设置密码" />
                 </FormGroup>
                 <FormGroup>
-                  <input type="password" placeholder="密码" className="form-control" />
+                  <FormControl type="password" ref={(password2) => { this.password2 = password2; }} placeholder="确认密码" />
                 </FormGroup>
                 <FormGroup>
-                  <Button type="submit" bsStyle="primary">登录</Button>
-                  <a href="/#/login" style={{ ...linkStyle, margin: 'auto auto auto 80px' }} onMouseEnter={this.toggleHover} onMouseLeave={this.toggleHover}>Log In</a>
+                  <Button
+                    onClick={event => this.handleClick(event)}
+                    type="submit"
+                    bsStyle="primary"
+                  >
+                    登录
+                  </Button>
+                  <a
+                    href="/#/login"
+                    style={{ ...linkStyle, margin: 'auto auto auto 80px' }}
+                    onMouseEnter={this.toggleHover}
+                    onMouseLeave={this.toggleHover}
+                  >
+                    Log In
+                  </a>
                 </FormGroup>
               </form>
             </div>

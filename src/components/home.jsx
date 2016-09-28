@@ -26,12 +26,6 @@ class Home extends Component {
     this.setState({ hover: !this.state.hover });
   }
 
-  handleClick() {
-    const email = this.email;
-    const password1 = this.password1;
-    const password2 = this.password2;
-  }
-
   render() {
     let linkStyle;
     if (this.state.hover) {
@@ -51,7 +45,7 @@ class Home extends Component {
                 <h1 style={{ color: '#76b6e1', textAlign: 'center' }}>Wecan TV</h1>
                 <p style={{ fontSize: '24px', color: '#f1f1f1', textAlign: 'center' }}>现在注册</p>
               </div>
-              <form className="form" action="/#/signup">
+              <form className="form">
                 <FormGroup>
                   <FormControl type="email" ref={(email) => { this.email = email; }} placeholder="电子邮箱" />
                 </FormGroup>
@@ -63,7 +57,6 @@ class Home extends Component {
                 </FormGroup>
                 <FormGroup>
                   <Button
-                    onClick={event => this.handleClick(event)}
                     type="submit"
                     bsStyle="primary"
                   >

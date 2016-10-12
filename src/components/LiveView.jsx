@@ -67,6 +67,24 @@ class LiveView extends Component {
     const text = document.getElementById('msgText').value;
     document.getElementById('msgText').value = '';
     if (text.replace(/(^\s*)|(\s*$)/g, '') !== '') {
+      // 弹幕实现
+      const bulletScreen = document.getElementById('bullet-screen');
+      const pre = document.createElement('pre');
+      pre.setAttribute('class', 'someclass');
+      pre.style = `width:${text.lengthem}`;
+      pre.innerHTML = text;
+      bulletScreen.appendChild(pre);
+      const pres = document.getElementsByClassName('someclass');
+      const lastPre = pres[pres.length - 1];
+      // 移动弹幕
+      setTimeout(() => {
+        lastPre.setAttribute('class', 'change');
+      }, 100);
+      // 隐藏弹幕
+      setTimeout(() => {
+        lastPre.style = 'display: none';
+      }, 8500);
+
       // 向服务器发送数据
       this.state.websocket.send(`${this.props.username}: ${text}`);
     }
@@ -85,6 +103,7 @@ class LiveView extends Component {
       <div className="container">
         <h1>{this.props.live.description}</h1>
         <div id="live-player" />
+        <div id="bullet-screen" style={{ zIndex: 120, width: 'auto', height: '50vh', overflow: 'hidden' }} />
         {/* 主聊天区 */}
         <div style={{ background: 'whiteSmoke', height: '33.1vh' }}>
           {/* 消息显示区 */}

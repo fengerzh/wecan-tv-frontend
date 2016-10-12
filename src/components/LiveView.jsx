@@ -103,7 +103,7 @@ class LiveView extends Component {
       <div className="container">
         <h1>{this.props.live.description}</h1>
         <div id="live-player" />
-        <div id="bullet-screen" style={{ zIndex: 120, width: 'auto', height: '50vh', overflow: 'hidden' }} />
+        <div id="bullet-screen" style={{ zIndex: 120, width: 'auto', height: '50vh', overflow: 'hidden', margin: '-50vh auto auto auto' }} />
         {/* 主聊天区 */}
         <div style={{ background: 'whiteSmoke', height: '33.1vh' }}>
           {/* 消息显示区 */}

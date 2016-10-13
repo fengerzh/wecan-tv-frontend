@@ -7,6 +7,7 @@ class LiveView extends Component {
     super();
     this.state = {
       websocket: null,
+      obj: null,
     };
   }
 
@@ -70,20 +71,20 @@ class LiveView extends Component {
       // 弹幕实现
       const bulletScreen = document.getElementById('bullet-screen');
       const pre = document.createElement('pre');
-      pre.setAttribute('class', 'someclass');
-      pre.style = `width:${text.lengthem}`;
+      pre.className = 'oldp';
+      pre.style = `width:${text.length}em`;
       pre.innerHTML = text;
       bulletScreen.appendChild(pre);
-      const pres = document.getElementsByClassName('someclass');
+      const pres = document.getElementsByTagName('pre');
       const lastPre = pres[pres.length - 1];
       // 移动弹幕
       setTimeout(() => {
-        lastPre.setAttribute('class', 'change');
+        lastPre.className += ' changemessage';
       }, 100);
       // 隐藏弹幕
       setTimeout(() => {
         lastPre.style = 'display: none';
-      }, 8500);
+      }, 5500);
 
       // 向服务器发送数据
       this.state.websocket.send(`${this.props.username}: ${text}`);

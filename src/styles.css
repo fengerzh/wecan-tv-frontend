@@ -33,3 +33,28 @@
     width: auto !important;
     height: 50vh !important;
 }
+
+.changemessage {
+    transition: margin-left linear 6s;
+    margin-left: 50px;
+    animation: toleft 5.5s linear;
+    z-index: 2;
+}
+
+@keyframes toleft {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-1000px);
+    }
+}
+
+.oldp {
+    position: absolute;
+    border: 2px solid cadetblue;
+    margin-top: 30px;
+    margin-left: 1000px;
+    font-size: 20px;
+    z-index: 2;
+}

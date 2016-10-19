@@ -1,6 +1,7 @@
 /* eslint react/forbid-prop-types: 0 */
 
 import React, { Component, PropTypes } from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class LiveView extends Component {
   constructor() {
@@ -8,7 +9,13 @@ class LiveView extends Component {
     this.state = {
       websocket: null,
       obj: null,
+      word: '',
+      value: '',
+      index: 0,
+      top: 0,
     };
+    this.sendMsg = this.sendMsg.bind(this);
+    this.returnWord = this.returnWord.bind(this);
   }
 
   componentWillMount() {
@@ -64,28 +71,23 @@ class LiveView extends Component {
     };
   }
 
+  returnWord(text) {
+    const index = this.state.index;
+    const top = this.state.top;
+    this.setState({ word: text, index: index + 1 });
+    if (top <= 32) {
+      this.setState({ top: top + 8 });
+    } else if (top > 32) {
+      this.setState({ top: 8 });
+    }
+  }
+
   sendMsg() {
     const text = document.getElementById('msgText').value;
     document.getElementById('msgText').value = '';
     if (text.replace(/(^\s*)|(\s*$)/g, '') !== '') {
-      // 弹幕实现
-      const bulletScreen = document.getElementById('bullet-screen');
-      const pre = document.createElement('pre');
-      pre.className = 'oldp';
-      pre.style = `width:${text.length}em`;
-      pre.innerHTML = text;
-      bulletScreen.appendChild(pre);
-      const pres = document.getElementsByTagName('pre');
-      const lastPre = pres[pres.length - 1];
-      // 移动弹幕
-      setTimeout(() => {
-        lastPre.className += ' changemessage';
-      }, 100);
-      // 隐藏弹幕
-      setTimeout(() => {
-        lastPre.style = 'display: none';
-      }, 5500);
-
+      // 发送弹幕
+      this.returnWord(text);
       // 向服务器发送数据
       this.state.websocket.send(`${this.props.username}: ${text}`);
     }
@@ -93,6 +95,18 @@ class LiveView extends Component {
 
   render() {
     const { loading, error } = this.props;
+    const item = (
+      <div
+        className="bullet"
+        key={this.state.index}
+        style={{
+          top: `${this.state.top}vh`,
+          color: 'rgb(255, 255, 255)',
+        }}
+      >
+        {this.state.word}
+      </div>
+    );
 
     if (loading) {
       return <div className="container"><h1>Posts</h1><h3>Loading...</h3></div>;
@@ -104,18 +118,76 @@ class LiveView extends Component {
       <div className="container">
         <h1>{this.props.live.description}</h1>
         <div id="live-player" />
-        <div id="bullet-screen" style={{ zIndex: 120, width: 'auto', height: '50vh', overflow: 'hidden', margin: '-50vh auto auto auto' }} />
+        <div
+          id="bullt-screen"
+          style={{
+            position: 'relative',
+            // zIndex: 120,
+            width: 'auto',
+            height: '46vh',
+            overflow: 'hidden',
+            margin: '-50vh auto auto auto',
+            background: 'rgba(0, 255, 0, 0.2)',
+          }}
+        >
+          <ReactCSSTransitionGroup
+            transitionName={{
+              enter: 'bullet-enter',
+              leave: 'bullet-leave',
+              leaveActive: 'bullet-leave-active',
+              appear: 'bullet-appear',
+              appearActive: 'bullet-appear-active',
+            }}
+            transitionEnterTimeout={5000}
+            transitionLeave={false}
+            transitionAppear={true}
+            transitionAppearTimeout={5000}
+          >
+            {item}
+          </ReactCSSTransitionGroup>
+        </div>
         {/* 主聊天区 */}
-        <div style={{ background: 'whiteSmoke', height: '33.1vh' }}>
+        <div
+          style={{ background: 'whiteSmoke', height: '33.1vh' }}
+        >
           {/* 消息显示区 */}
-          <div id="msg" style={{ width: 'auto', height: '70%', padding: '10px 0', background: 'whitesmoke', overflow: 'auto', boxSizing: 'border-box' }} />
+          <div
+            id="msg"
+            style={{
+              width: 'auto',
+              height: '70%',
+              padding: '10px 0',
+              background: 'whitesmoke',
+              overflow: 'auto',
+              boxSizing: 'border-box',
+            }}
+          />
           {/* 消息发送区 */}
-          <div style={{ height: '30%', borderTop: '1px solid #999', padding: '10px', boxSizing: 'border-box' }}>
+          <div
+            style={{
+              height: '30%',
+              borderTop: '1px solid #999',
+              padding: '10px',
+              boxSizing: 'border-box',
+            }}
+          >
             <div className="col-md-8">
-              <input type="text" name="text" id="msgText" style={{ width: '70%', height: '4vh' }} />
+              <input
+                type="text"
+                name="text"
+                id="msgText"
+                style={{ width: '70%', height: '4vh' }}
+              />
             </div>
             <div className="col-md-4">
-              <button id="button" onClick={event => this.sendMsg(event)} className="btn btn-primary" style={{ with: '20%', height: '4vh' }}>发送</button>
+              <button
+                id="button"
+                onClick={this.sendMsg}
+                className="btn btn-primary"
+                style={{ with: '20%', height: '4vh' }}
+              >
+                发送
+              </button>
             </div>
           </div>
         </div>

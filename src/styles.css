@@ -34,27 +34,20 @@
     height: 50vh !important;
 }
 
-.changemessage {
-    transition: margin-left linear 6s;
-    margin-left: 50px;
-    animation: toleft 5.5s linear;
-    z-index: 2;
+／＊弹幕＊／
+.bullet {
+  opacity: 0.01;
 }
 
-@keyframes toleft {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(-1000px);
-    }
+.bullet-enter {
+  opacity: 1;
+  position: absolute;
+  left: 90%;
 }
 
-.oldp {
-    position: absolute;
-    border: 2px solid cadetblue;
-    margin-top: 30px;
-    margin-left: 1000px;
-    font-size: 20px;
-    z-index: 2;
+.bullet-enter.bullet-enter-active {
+  opacity: .5;
+  position: absolute;
+  left: -100px;
+  transition: all 5000ms ease-in;
 }

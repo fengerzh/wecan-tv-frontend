@@ -29,7 +29,7 @@ class BulletScreen extends Component {
           height: '46vh',
           overflow: 'hidden',
           margin: '-50vh auto auto auto',
-          background: 'rgba(0, 255, 0, 0.2)',
+          background: 'rgba(0, 255, 0, 0.01)',
         }}
       >
         <ReactCSSTransitionGroup

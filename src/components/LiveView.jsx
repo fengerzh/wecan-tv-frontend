@@ -113,7 +113,10 @@ class LiveView extends Component {
         />
         {/* 主聊天区 */}
         <div
-          style={{ background: 'whiteSmoke', height: '33.1vh' }}
+          style={{
+            background: 'whiteSmoke',
+            height: '33.1vh',
+          }}
         >
           {/* 消息显示区 */}
           <div
@@ -141,7 +144,10 @@ class LiveView extends Component {
                 type="text"
                 name="text"
                 id="msgText"
-                style={{ width: '70%', height: '4vh' }}
+                style={{
+                  width: '70%',
+                  height: '4vh',
+                }}
                 maxLength="20"
               />
             </div>
@@ -150,7 +156,10 @@ class LiveView extends Component {
                 id="button"
                 onClick={this.sendMsg}
                 className="btn btn-primary"
-                style={{ with: '20%', height: '4vh' }}
+                style={{
+                  with: '20%',
+                  height: '4vh',
+                }}
               >
                 发送
               </button>

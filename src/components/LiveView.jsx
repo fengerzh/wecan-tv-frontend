@@ -121,7 +121,7 @@ class LiveView extends Component {
             style={{
               width: 'auto',
               height: '70%',
-              padding: '10px 0',
+              padding: '38px 0',
               background: 'whitesmoke',
               overflow: 'auto',
               boxSizing: 'border-box',
@@ -132,7 +132,7 @@ class LiveView extends Component {
             style={{
               height: '30%',
               borderTop: '1px solid #999',
-              padding: '38px 0',
+              padding: '10px',
               boxSizing: 'border-box',
             }}
           >

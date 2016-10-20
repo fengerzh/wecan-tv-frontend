@@ -48,6 +48,6 @@
 .bullet-enter.bullet-enter-active {
   opacity: .5;
   position: absolute;
-  left: -100px;
+  left: -1000px;
   transition: all 5000ms ease-in;
 }

@@ -1,7 +1,7 @@
 /* eslint react/forbid-prop-types: 0 */
 
 import React, { Component, PropTypes } from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import BulletScreen from './BulletScreen';
 
 class LiveView extends Component {
   constructor() {
@@ -95,20 +95,6 @@ class LiveView extends Component {
 
   render() {
     const { loading, error } = this.props;
-    const item = (
-      <div
-        className="bullet"
-        key={this.state.index}
-        style={{
-          top: `${this.state.top}vh`,
-          color: 'rgb(255, 255, 255)',
-          whiteSpace: 'nowrap',
-          fontSize: '3vh',
-        }}
-      >
-        {this.state.word}
-      </div>
-    );
 
     if (loading) {
       return <div className="container"><h1>Posts</h1><h3>Loading...</h3></div>;
@@ -120,33 +106,17 @@ class LiveView extends Component {
       <div className="container">
         <h1>{this.props.live.description}</h1>
         <div id="live-player" />
-        <div
-          id="bullt-screen"
-          style={{
-            position: 'relative',
-            // zIndex: 120,
-            width: 'auto',
-            height: '46vh',
-            overflow: 'hidden',
-            margin: '-50vh auto auto auto',
-            background: 'rgba(0, 255, 0, 0.01)',
-          }}
-        >
-          <ReactCSSTransitionGroup
-            transitionName={{
-              enter: 'bullet-enter',
-              appear: 'bullet-appear',
-            }}
-            transitionEnterTimeout={5000}
-            transitionAppearTimeout={5000}
-            transitionLeave={false}
-          >
-            {item}
-          </ReactCSSTransitionGroup>
-        </div>
+        <BulletScreen
+          index={this.state.index}
+          top={this.state.top}
+          word={this.state.word}
+        />
         {/* 主聊天区 */}
         <div
-          style={{ background: 'whiteSmoke', height: '33.1vh' }}
+          style={{
+            background: 'whiteSmoke',
+            height: '33.1vh',
+          }}
         >
           {/* 消息显示区 */}
           <div
@@ -174,7 +144,10 @@ class LiveView extends Component {
                 type="text"
                 name="text"
                 id="msgText"
-                style={{ width: '70%', height: '4vh' }}
+                style={{
+                  width: '70%',
+                  height: '4vh',
+                }}
                 maxLength="20"
               />
             </div>
@@ -183,7 +156,10 @@ class LiveView extends Component {
                 id="button"
                 onClick={this.sendMsg}
                 className="btn btn-primary"
-                style={{ with: '20%', height: '4vh' }}
+                style={{
+                  with: '20%',
+                  height: '4vh',
+                }}
               >
                 发送
               </button>

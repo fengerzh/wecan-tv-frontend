@@ -24,7 +24,6 @@ class BulletScreen extends Component {
         id="bullt-screen"
         style={{
           position: 'relative',
-          // zIndex: 120,
           width: 'auto',
           height: '46vh',
           overflow: 'hidden',
@@ -35,13 +34,9 @@ class BulletScreen extends Component {
         <ReactCSSTransitionGroup
           transitionName={{
             enter: 'bullet-enter',
-            leave: 'bullet-leave',
-            appear: 'bullet-appear',
           }}
           transitionEnterTimeout={5000}
           transitionLeave={false}
-          transitionAppear={true}
-          transitionAppearTimeout={5000}
         >
           {item}
         </ReactCSSTransitionGroup>

@@ -132,7 +132,7 @@ class LiveView extends Component {
             style={{
               height: '30%',
               borderTop: '1px solid #999',
-              padding: '10px',
+              padding: '38px 0',
               boxSizing: 'border-box',
             }}
           >

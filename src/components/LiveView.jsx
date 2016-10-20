@@ -102,6 +102,8 @@ class LiveView extends Component {
         style={{
           top: `${this.state.top}vh`,
           color: 'rgb(255, 255, 255)',
+          whiteSpace: 'nowrap',
+          fontSize: '3vh',
         }}
       >
         {this.state.word}
@@ -134,9 +136,7 @@ class LiveView extends Component {
             transitionName={{
               enter: 'bullet-enter',
               leave: 'bullet-leave',
-              leaveActive: 'bullet-leave-active',
               appear: 'bullet-appear',
-              appearActive: 'bullet-appear-active',
             }}
             transitionEnterTimeout={5000}
             transitionLeave={false}
@@ -177,6 +177,7 @@ class LiveView extends Component {
                 name="text"
                 id="msgText"
                 style={{ width: '70%', height: '4vh' }}
+                maxLength="20"
               />
             </div>
             <div className="col-md-4">

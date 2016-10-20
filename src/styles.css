@@ -34,7 +34,7 @@
     height: 50vh !important;
 }
 
-／＊弹幕＊／
+/* 弹幕样式 */
 .bullet {
   opacity: 0.01;
 }

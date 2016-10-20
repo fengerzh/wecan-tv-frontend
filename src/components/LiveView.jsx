@@ -129,19 +129,17 @@ class LiveView extends Component {
             height: '46vh',
             overflow: 'hidden',
             margin: '-50vh auto auto auto',
-            background: 'rgba(0, 255, 0, 0.2)',
+            background: 'rgba(0, 255, 0, 0.01)',
           }}
         >
           <ReactCSSTransitionGroup
             transitionName={{
               enter: 'bullet-enter',
-              leave: 'bullet-leave',
               appear: 'bullet-appear',
             }}
             transitionEnterTimeout={5000}
-            transitionLeave={false}
-            transitionAppear={true}
             transitionAppearTimeout={5000}
+            transitionLeave={false}
           >
             {item}
           </ReactCSSTransitionGroup>
@@ -156,7 +154,7 @@ class LiveView extends Component {
             style={{
               width: 'auto',
               height: '70%',
-              padding: '10px 0',
+              padding: '38px 0',
               background: 'whitesmoke',
               overflow: 'auto',
               boxSizing: 'border-box',

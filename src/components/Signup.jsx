@@ -20,7 +20,6 @@ class Signup extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    console.log(newProps);
     // 当登录状态发生变化时执行以下代码
     const { isAuthenticated } = newProps;
     if (isAuthenticated) {
@@ -32,7 +31,6 @@ class Signup extends Component {
         this.props.router.replace('/');
       }
     }
-    console.log(location);
   }
 
   handleSubmit(event) {

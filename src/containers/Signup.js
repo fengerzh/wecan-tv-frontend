@@ -4,7 +4,6 @@ import { signupUser } from '../actions/Signup';
 import Signup from '../components/Signup';
 
 function mapStateToProps(state) {
-  console.log(state);
   return {
     errorMessage: state.signupreducer.errorMessage,
     isAuthenticated: state.signupreducer.isAuthenticated,

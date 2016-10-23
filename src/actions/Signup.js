@@ -47,17 +47,14 @@ export function signupUser(creds) {
       ).then(({ user, response }) => {
         let signupResult;
         if (!response.ok) {
-          console.log(111);
           dispatch(signupError(user.message));
           signupResult = Promise.reject(user);
         } else {
-          console.log(222);
           // 注册成功，存储token
           localStorage.setItem('id_token', user.id_token);
           localStorage.setItem('username', user.username);
           dispatch(receiveSignup(user));
         }
-        console.log(signupResult);
         return signupResult;
       })
       .catch(err => console.log(err));

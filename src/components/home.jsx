@@ -45,7 +45,7 @@ class Home extends Component {
                 <h1 style={{ color: '#76b6e1', textAlign: 'center' }}>Wecan TV</h1>
                 <p style={{ fontSize: '24px', color: '#f1f1f1', textAlign: 'center' }}>现在注册</p>
               </div>
-              <form className="form">
+              <form className="form" action="/#/signup">
                 <FormGroup>
                   <FormControl type="email" ref={(email) => { this.email = email; }} placeholder="电子邮箱" />
                 </FormGroup>
@@ -56,12 +56,12 @@ class Home extends Component {
                   <FormControl type="password" ref={(password2) => { this.password2 = password2; }} placeholder="确认密码" />
                 </FormGroup>
                 <FormGroup>
-                  <Button
-                    type="submit"
-                    bsStyle="primary"
+                  <a
+                    href="/#/signup"
+                    className="btn btn-primary"
                   >
                     登录
-                  </Button>
+                  </a>
                   <a
                     href="/#/login"
                     style={{ ...linkStyle, margin: 'auto auto auto 80px' }}
